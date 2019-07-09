@@ -1,3 +1,5 @@
+-- Para entrar no MySql == mysql -h localhost -u root -p
+-- 
 -- create database == cria o banco
 -- 
 -- show database == mosta o banco
@@ -20,4 +22,4 @@
 
 -- SELECT * FROM usuarios; == seleciona todos os dados cadastrados na tabela usuario
 
--- SELECT * FROM usuarios WHERE idade = 4; == seleciona todos os usuarios na tebela que tenha a idaide 4
+-- SELECT * FROM usuarios WHERE idade = 4; == seleciona todos os usuarios na tebela que tenha a idade 4
