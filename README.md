@@ -5,3 +5,5 @@ Links úteis:
 - https://www.npmjs.com/package/nodemon
 - https://www.npmjs.com/package/sequelize
 - https://handlebarsjs.com/installation.html 
+- https://www.mongodb.com/
+- https://mongoosejs.com/

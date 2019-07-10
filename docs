@@ -1,0 +1,41 @@
+Para entrar no MySql == mysql -h localhost -u root -p
+
+create database; == cria o banco
+ 
+show database; == mosta o banco
+ 
+CREATE TABLE usuarios( == cria a tabela 
+     nome VARCHAR(50),
+     email VARCHAR(100),
+     idade INT
+);
+ 
+INSERT INTO usuarios(nome, email, idade) VALUES( == insere valores na tabela
+    'Will',
+    'will.roc@hotmail.com',
+    22
+);
+
+describe usuarios; == mostra a tabela usuarios
+
+show tables; == lista as tabelas
+
+SELECT * FROM usuarios; == seleciona todos os dados cadastrados na tabela usuario
+
+SELECT * FROM usuarios WHERE idade = 4; == seleciona todos os usuarios na tebela que tenha a idade 4
+
+=====================================================================================================
+
+mongod == inicia servido mongo
+
+mongo == inicia o banco de dados mongo
+
+use nomeDoBanco; == cria o banco no mongo ou entra dentro de um já existente
+
+show databases; == mostra todos os bancos dentro do mongo
+
+show collections; == mostra todas as collections no banco mongo 
+
+db.nomeDaCollection.find(); == mostra todos os dados armazenado dentro da collection
+
+No mongo, é utilizado tipo "String" sempre para texto, e "Number" sempre para número.
