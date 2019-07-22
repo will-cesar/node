@@ -6,8 +6,30 @@
     const app = express();
     const admin = require("./routes/admin");
     const path = require("path");
+    const session = require("express-session")
+    const flash = require("connect-flash") // modulo flash é utilizado para apagar as mensagens logo após recarregar a página
 
 // Configurações
+    // Sessão
+    app.use(session({
+        secret: "cursodenode",
+        resave: true,
+        saveUninitialized: true
+    }))
+
+    app.use(flash())
+
+    // Middleware == tudo que utiliza o app.use é um middleware
+    // app.use((req, res, next) => { // middleware é uma função que fica rodando esperando acontecer alguma requisição na aplicação, quando acontecer exerce um comando desejado
+    //     console.log("Oi middleware")
+    //     next();
+    // })
+
+    app.use((req, res, next) => { 
+        res.locals.success_msg = req.flash("success_msg") // locals torna uma variável global na aplicação
+        res.locals.error_msg = req.flash("error_msg")
+        next()
+    })
 
     // Body Parse
     app.use(bodyParser.urlencoded({extended: true}));
@@ -18,9 +40,17 @@
     app.set('view engine', 'handlebars');
 
     // Mongoose
+    mongoose.Promise = global.Promise;
+    mongoose.connect("mongodb://localhost/blogapp", { 
+        useNewUrlParser: true 
+    }).then(() => {
+        console.log("Conectado ao mongo")
+    }).catch((error) => {
+        console.log("Erro ao se conectar: " + error);
+    })
 
     // Public
-    app.use(express.static(path.join(__dirname, "public"))); //utilizando pastas de arquivos estáticos
+    app.use(express.static(path.join(__dirname, "public"))); //utilizando pastas de arquivos estáticos    
 
 // Rotas
     app.get('/', (req, res) => {
