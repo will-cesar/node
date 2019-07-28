@@ -193,7 +193,7 @@ router.post("/postagem/edit", (req,res) => { // edita as postagens
 
 })
 
-router.get("/postagens/deletar/:id", (req,res) => {
+router.get("/postagens/deletar/:id", (req,res) => { // deletar postagem
     Postagem.remove({_id: req.params.id}).then(() => {
         req.flash("success_msg", "Categoria deletada com sucesso!")
         res.redirect("/admin/postagens")

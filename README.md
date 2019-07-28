@@ -7,3 +7,8 @@ Links úteis:
 - https://handlebarsjs.com/installation.html 
 - https://www.mongodb.com/
 - https://mongoosejs.com/
+- http://www.passportjs.org/
+- https://www.npmjs.com/package/bcryptjs
+- https://www.heroku.com/nodejs
+- https://mlab.com/
+- https://devcenter.heroku.com/articles/heroku-cli

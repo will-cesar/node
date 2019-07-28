@@ -15,6 +15,15 @@
     require("./models/Categorias")
     const Categoria = mongoose.model("categorias")
 
+    const usuarios = require("./routes/usuario")
+
+    const passport = require("passport")
+    require("./config/auth")(passport)
+
+    const {eAdmin} = require("./helpers/eAdmin") // pega a função "eAdmin" dentro do arquivo. O "eAdmin" na router tras a condição de mostrar a rota apenas se for admin
+
+    const db = require("./config/db")
+
 // Configurações
     // Sessão
     app.use(session({
@@ -23,17 +32,21 @@
         saveUninitialized: true
     }))
 
+    app.use(passport.initialize())
+    app.use(passport.session())
     app.use(flash())
 
     // Middleware == tudo que utiliza o app.use é um middleware
     // app.use((req, res, next) => { // middleware é uma função que fica rodando esperando acontecer alguma requisição na aplicação, quando acontecer exerce um comando desejado
     //     console.log("Oi middleware")
     //     next();
-    // })
+    // }) 
 
     app.use((req, res, next) => { 
         res.locals.success_msg = req.flash("success_msg") // locals torna uma variável global na aplicação
         res.locals.error_msg = req.flash("error_msg")
+        res.locals.error = req.flash("error")
+        res.locals.user = req.user || null; // armazena dados do usuário logado
         next()
     })
 
@@ -47,9 +60,7 @@
 
     // Mongoose
     mongoose.Promise = global.Promise;
-    mongoose.connect("mongodb://localhost/blogapp", { 
-        useNewUrlParser: true 
-    }).then(() => {
+    mongoose.connect(db.mongoURI, { useNewUrlParser: true }).then(() => {
         console.log("Conectado ao mongo")
     }).catch((error) => {
         console.log("Erro ao se conectar: " + error);
@@ -123,10 +134,14 @@
         res.send("Lista Posts");
     })
 
-    app.use('/admin', admin); // arquivo para rotas admin
+    app.use('/admin', eAdmin, admin); // arquivo para rotas admin
+
+    app.use("/usuarios", usuarios); // arquivo para rotas usuarios
 
 // Outros
-    const PORT = 8081;
+    // const PORT = 8081;
+    const PORT = process.env.PORT 
+    // const PORT = process.env.PORT || 8081
     app.listen(PORT, () => {
         console.log("Servidor rodando http://localhost:8081");
     })
