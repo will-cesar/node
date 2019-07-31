@@ -1,4 +1,4 @@
-const mongoose = require("../database"); // pega a promisse já declara do index.js dentro do database
+const mongoose = require("../../database"); // pega a promisse já declara do index.js dentro do database
 const bcrypt = require('bcryptjs');
 
 const UserSchema = new mongoose.Schema({
@@ -11,6 +11,14 @@ const UserSchema = new mongoose.Schema({
         unique: true,
         required: true,
         lowercase: true
+    },
+    passwordResetToken: {
+        type: String,
+        select: false
+    },
+    passwordResetExpires: {
+        type: Date,
+        select: false
     },
     password: {
         type: String,

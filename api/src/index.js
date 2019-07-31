@@ -10,8 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false})); // para entender quando pass
 //     res.send('ok')
 // })
 
-require('./controllers/authController')(app); // repassa a classe "app" para utilizar em outros arquivos, pois o app só pode ser criado em um único projeto 
-require('./controllers/projectController')(app);
+require('./app/controllers/index')(app); // repassa a classe "app" para utilizar em outros arquivos, pois o app só pode ser criado em um único projeto 
 
 app.listen(3000, () => {
     console.log("Servidor aberto em http://localhost:3000");
